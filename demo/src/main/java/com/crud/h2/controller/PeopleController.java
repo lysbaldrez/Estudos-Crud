@@ -20,7 +20,7 @@ public class PeopleController {
 
     @RequestMapping("/list")
     public String list (Model model) {
-        model.addAttribute("peoples",service.list());
+        model.addAttribute("people",service.list());
         return "index";
     }
 
