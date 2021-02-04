@@ -5,10 +5,7 @@ import com.crud.h2.service.IPeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -33,9 +30,16 @@ public class PeopleController {
     public String add(@Valid People p) {
         service.add(p);
         return "redirect:/list";
+        People people = new People();
+        People people2 = new People();
+        people.setName("Rafaella");
+        people2.setName("Rafaella");
+        if (people.getName().equals(people2.getName())) {
+            throw new Exception ("Não pode ter dois nomes iguais");
+        }
     }
 
-    @GetMapping("edit/{id}")
+    @PostMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model){
         People people = service.listPeopleId(id);
         model.addAttribute("people", people);
@@ -48,7 +52,7 @@ public class PeopleController {
         return "redirect:/list";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable int id){
         service.delete(id);
         return "redirect:/list";

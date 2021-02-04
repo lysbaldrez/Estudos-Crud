@@ -20,10 +20,10 @@ public class CrudProjectApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		template.execute("DROP TABLE PEOPLE IF EXISTS");
-		template.execute("CREATE TABLE PEOPLE(id INTEGER (11) PRIMARY-KEY auto_increment, name VARCHAR(255))");
+		template.execute("CREATE TABLE PEOPLE(id INTEGER (11) PRIMARY KEY auto_increment, name VARCHAR(255))");
 
 		for (int i= 0; i < 3; i++) {
-			template.update("insert into people(name)values('People 000'"+i+"')");
+			template.update("insert into people(name)values('People 000"+i+"')");
 		}
 	}
 }

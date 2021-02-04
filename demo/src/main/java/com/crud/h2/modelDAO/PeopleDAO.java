@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public class PeopleDAO implements IPeople{
 
+    People p1 = new People();
+    People p2 = new People();
+
     @Autowired
     private JdbcTemplate template;
 
@@ -34,6 +37,8 @@ public class PeopleDAO implements IPeople{
         String sql="insert into people(name)values(?)";
         int res=template.update(sql,p.getName());
         return res;
+
+
     }
 
     @Override
