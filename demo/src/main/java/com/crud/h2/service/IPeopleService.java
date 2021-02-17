@@ -10,7 +10,9 @@ public interface IPeopleService {
 
     public People listPeopleId(int id);
 
-    public int add(People p);
+    public List<People> listPeopleName();
+
+    public People add(People p);
 
     public int edit(People p);
 

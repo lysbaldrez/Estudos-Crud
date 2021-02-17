@@ -27,16 +27,8 @@ public class PeopleController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid People p) {
-        service.add(p);
-        return "redirect:/list";
-        People people = new People();
-        People people2 = new People();
-        people.setName("Rafaella");
-        people2.setName("Rafaella");
-        if (people.getName().equals(people2.getName())) {
-            throw new Exception ("Não pode ter dois nomes iguais");
-        }
+    public People add(@Valid People p) throws Exception {
+        return service.add(p);
     }
 
     @PostMapping("edit/{id}")

@@ -7,6 +7,8 @@ import java.util.List;
 public interface IPeople {
     public List<People> list();
 
+    public List<People> listPeopleName();
+
     public People listPeopleId(int id);
 
     public int add(People p);

@@ -2,9 +2,11 @@ package com.crud.h2.service;
 
 import com.crud.h2.model.People;
 import com.crud.h2.modelDAO.IPeople;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,10 +25,22 @@ public class PeopleService implements IPeopleService{
         return dao.listPeopleId(id);
     }
 
+
+    public List<People> listPeopleName() {
+        return dao.listPeopleName();
+    }
+
+    // Condição é no service, o controller não serve para regras de negócio
     @Override
-    public int add(People p) {
+    public People add(People p)  {
+        List<People> peopleList= listPeopleName();
+        for (People people: peopleList) {
+            if (p.getName().equals(people.getName())) {
+                throw new IllegalArgumentException();
+            }
+        }
         dao.add(p);
-        return 0;
+        return p;
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -30,6 +31,14 @@ public class PeopleDAO implements IPeople{
         String sql="select * from people where id=?";
         People peo=template.queryForObject(sql, new Object[] {id}, new BeanPropertyRowMapper<People>(People.class));
         return peo;
+    }
+
+    @Override
+    public List<People> listPeopleName() {
+        String sql="select * from people";
+        List<People> peopleList = new ArrayList<>();
+        peopleList.addAll(template.query(sql, new BeanPropertyRowMapper<People>(People.class)));
+        return peopleList;
     }
 
     @Override
